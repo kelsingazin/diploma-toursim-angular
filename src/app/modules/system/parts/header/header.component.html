@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+  <a class="navbar-brand">Travel Kazakhstan</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapse_target">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapse_target">
+
+    <ul class="navbar-nav" mr-auto>
+      <li class="nav-item">
+        <a routerLink="/" class="nav-link">Home</a>
+      </li>
+<!--      <li class="nav-item">-->
+<!--        <a routerLink="/chat" class="nav-link">Chat</a>-->
+<!--      </li>-->
+      <li class="nav-item">
+        <a routerLink="/tours" class="nav-link">Tours</a>
+      </li>
+      <li *ngIf="authService.checkAuthorized()" class="nav-item">
+        <a routerLink="/account" class="nav-link">Account</a>
+      </li>
+      <li *ngIf="!authService.checkAuthorized()" class="nav-item">
+        <a routerLink="/auth" class="nav-link">Login</a>
+      </li>
+      <li *ngIf="!authService.checkAuthorized()" class="nav-item">
+        <a routerLink="/auth/register" class="nav-link">Register</a>
+      </li>
+      <li *ngIf="authService.checkAuthorized()" class="nav-item" (click)="authService.clearAll()">
+        <a routerLink="/auth/register" class="nav-link">Log out</a>
+      </li>
+    </ul>
+  </div>
+</nav>

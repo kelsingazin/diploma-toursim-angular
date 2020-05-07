@@ -1,0 +1,24 @@
+<div class="card tour__card">
+  <div class="flexdiv">
+    <div class="card-header">
+      <h2>{{ tour.title }}</h2>
+    </div>
+    <img [src]="srcUrl+tour.images[0].file" class="w-100 mb-3" style="width: 300px; height: 200px;">
+    <div>
+      <p>Tour duration: {{ tour.duration }}</p>
+    </div>
+    <div>
+      <p>Tour agent: {{ tour.travel_agent_id.travel_agent_name }}</p>
+    </div>
+  </div>
+
+  <div>
+    <button
+      [routerLink]="['/tour/', tour.id]"
+      class="btn btn-dark tour__open"
+      style="width: 100%"
+    >Open
+    </button>
+  </div>
+</div>
+

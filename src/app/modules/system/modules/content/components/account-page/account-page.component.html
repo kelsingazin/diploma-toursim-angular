@@ -1,0 +1,164 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-lg-12 my-5">
+      <!--      <div *ngIf="loading" class="lds-dual-ring"></div>-->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Hello {{profile.username}}!</h3>
+        </div>
+        <div class="card-body p-0" style="display: block;">
+          <form [formGroup]="paymentForm">
+            <table class="table table-striped projects">
+              <thead>
+              <tr>
+                <th>
+                  #
+                </th>
+                <th class="text-center">
+                  Tour Name
+                </th>
+                <th class="text-center">
+                  Number of travelers
+                </th>
+                <th class="text-center">
+                  Duration
+                </th>
+                <th class="text-center">
+                  Tour Price <i class="fas fa-tenge"></i>
+                </th>
+                <th class="text-center">
+                  Status
+                </th>
+                <th class="text-center">
+                  Delete
+                </th>
+                <th class="text-center">
+                  Pay
+                </th>
+                <th class="text-center">
+                  Ticket
+                </th>
+                <th class="text-center">
+                  Download
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr *ngFor="let bk of bookings let idx = index">
+
+
+                <td>
+                  {{idx + 1}}
+                </td>
+                <td class="text-center">
+                  {{bk.tour_detail.tour.title}}
+                </td>
+                <td class="text-center">
+                  {{bk.booking_number_of_persons}}
+                </td>
+                <td class="text-center">
+                  {{bk.tour_detail.tour.duration}}
+                </td>
+                <td class="text-center">
+                  {{bk.booking_price * bk.booking_number_of_persons}}
+                </td>
+                <td class="text-center">
+                  {{bk.booking_status}}
+                </td>
+                <td>
+                  <a class="btn btn-danger btn-sm m-1 text-white" style="width: 60px" (click)="deleteTour(bk.id)">
+                    <i class="fas fa-trash"></i>
+
+                  </a>
+                </td>
+                <td>
+                  <input type="hidden"  ngModel="{{bk.id}}" id="approveTourId" formControlName="id" >
+                  <a  class="btn btn-success btn-sm m-1 text-white" style="width: 60px" (click)="approveBooking()">
+                    <i class="fas fa-money-check-alt"></i>
+
+                  </a>
+                </td>
+                <td *ngIf="bk.booking_status==='Approved'">
+                  <a href="http://127.0.0.1:8000/api/v1/fornow/users/me/{{bk.id}}/pdf"
+                     class="btn btn-primary btn-sm m-1 text-white"
+                     style="width: 60px">
+                    <i class="fas fa-ticket-alt"></i>
+                  </a>
+                </td>
+                <td *ngIf="bk.booking_status==='Approved'">
+                  <a href="http://127.0.0.1:8000/api/v1/fornow/users/me/{{bk.id}}/pdf/download"
+                     class="btn btn-primary btn-sm m-1 text-white"
+                     style="width: 60px">
+                    <i class="fas fa-file-download"></i>
+                  </a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+
+<!--    <div class="col-md-12 col-lg-5 my-5">-->
+<!--      <div id="pay-invoice" class="card">-->
+<!--        <div class="card-body">-->
+<!--          <div class="card-title">-->
+<!--            <h3 class="text-center">Pay Invoice</h3>-->
+<!--          </div>-->
+<!--          <hr>-->
+<!--          <form>-->
+<!--            <div class="form-group ">-->
+<!--              <label for="creditCardName" class="mb-1">Name on card</label>-->
+<!--              <input id="creditCardName" name="creditCardName"-->
+<!--                     type="text" class="form-control"-->
+<!--                     placeholder="John Doe">-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--              <label for="creditCardNumber" class="mb-1">Card number</label>-->
+<!--              <input id="creditCardNumber" name="creditCardNumber"-->
+<!--                     type="text" class="form-control"-->
+<!--                     [textMask]="{mask: creditMask}"-->
+<!--                     placeholder="1234 5678 9012 3456">-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--              <div class="col-6">-->
+<!--                <div class="form-group">-->
+<!--                  <label for="creditCardExp" class="mb-1">Expiration</label>-->
+<!--                  <input id="creditCardExp" name="creditCardExp"-->
+<!--                         type="text" class="form-control"-->
+<!--                         [textMask]="{mask: dateMask}"-->
+<!--                         placeholder="12/22">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col-6">-->
+<!--                <label for="securityCardCode" class="mb-1">Security code</label>-->
+<!--                <div class="input-group">-->
+<!--                  <input id="securityCardCode" name="securityCardCode"-->
+<!--                         type="text" class="form-control"-->
+<!--                         [textMask]="{mask: securityMask}"-->
+<!--                         placeholder="123">-->
+<!--                  <div class="input-group-text"><i class="fa fa-question-circle"></i></div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            &lt;!&ndash;            <div *ngIf="bookings[0].booking_status === 'Waiting for payment'">&ndash;&gt;-->
+<!--            <div>-->
+<!--              <button type="submit" class="btn btn-lg btn-info btn-block" (click)="approveBooking()">-->
+<!--                <span class="mx-2">Pay <i class="fas fa-tenge"></i>{{totalPrice}}</span>-->
+<!--              </button>-->
+<!--            </div>-->
+<!--            <div *ngIf="bookings[0].booking_status === 'Approved'">-->
+<!--              <button type="submit" class="btn btn-lg btn-info btn-block" >-->
+<!--                Get PDF-->
+<!--              </button>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+  </div>
+</div>
+<br>

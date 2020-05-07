@@ -1,0 +1,47 @@
+<div class="container">
+
+  <div class="card card-danger my-4">
+    <div class="card-header">
+      <h3 class="card-title">Tour Filters</h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-4">
+          <input type="text" class="form-control" placeholder="Tour Title"  [(ngModel)]="searchTitle">
+        </div>
+        <div class="col-4">
+          <select class="form-control" [(ngModel)]="searchDuration">
+            <option selected>Tour Duration</option>
+            <option selected>2 days</option>
+            <option>5 days</option>
+          </select>
+        </div>
+        <div class="col-4">
+<!--          <input type="text" class="form-control" placeholder="Tour Agent" [(ngModel)]="searchTourAgent">-->
+          <select class="form-control" [(ngModel)]="searchTourAgent">
+            <option selected>Tour Providers</option>
+            <option selected>Nomad</option>
+            <option>Steppe Spirit</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div *ngIf="tours$ | async as tours;else loading"
+       class="posts">
+    <div class="row">
+      <app-tours-page
+        *ngFor="let tour of tours | searchTours:searchTitle | searchDurationPipe:searchDuration | searchTourAgentPipe:searchTourAgent"
+        [tour]="tour"
+        class="col-12 col-md-6 col-lg-4 mb-4">
+      </app-tours-page>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="lds-dual-ring"></div>
+</ng-template>

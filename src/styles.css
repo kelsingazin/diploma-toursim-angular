@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #4d4643;
+  margin-bottom: 97px;
+  background-color: #E9ECEF;
+}
+
+a {
+  color: #f03c02;
+}
+
+a:hover {
+  color: #fd5c28;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Muli", sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    margin-bottom: 150px;
+  }
+}

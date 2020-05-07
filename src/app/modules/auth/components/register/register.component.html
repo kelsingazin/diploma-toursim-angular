@@ -1,0 +1,114 @@
+<div class="register-box">
+  <div class="register-logo">
+    <a><b>Travel</b>Kazakhstan</a>
+  </div>
+
+  <div class="card">
+    <div class="card-body register-card-body">
+      <p class="login-box-msg">Registration</p>
+      <form [formGroup]="registerForm">
+
+        <div class="text-danger" *ngIf="!registerForm.get('username').valid && registerForm.get('username').touched">
+          <small>Enter a username</small>
+        </div>
+        <div class="input-group mb-3">
+          <input formControlName="username" type="text" class="form-control" placeholder="Username">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-danger" *ngIf="!registerForm.get('first_name').valid && registerForm.get('first_name').touched">
+          <small>Enter a first name</small>
+        </div>
+        <div class="input-group mb-3">
+          <input formControlName="first_name" type="text" class="form-control" placeholder="First Name">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="text-danger" *ngIf="!registerForm.get('last_name').valid && registerForm.get('last_name').touched">
+          <small>Enter a last name</small>
+        </div>
+        <div class="input-group mb-3">
+          <input formControlName="last_name" type="text" class="form-control" placeholder="Last Name">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="text-danger" *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched">
+          <small *ngIf="registerForm.get('email').errors.required">
+            Enter an email address!
+          </small>
+          <small *ngIf="registerForm.get('email').errors.email">
+            Enter correct Email address!
+          </small>
+        </div>
+        <div class="input-group mb-3">
+          <input formControlName="email" type="email" class="form-control" placeholder="Email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-danger" *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched">
+          <small *ngIf="registerForm.get('password').errors.required">
+            Enter password!
+          </small>
+          <small *ngIf="registerForm.get('password').errors.minlength">
+            Password must be at least {{registerForm.get('password').errors.minlength.requiredLength}}
+            characters!
+          </small>
+        </div>
+        <div class="input-group mb-3">
+          <input formControlName="password" type="password" class="form-control" placeholder="Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-danger" *ngIf="!registerForm.get('confirmPassword').valid && registerForm.get('confirmPassword').touched">
+          <small *ngIf="registerForm.get('confirmPassword').errors.required">
+            Enter password!
+          </small>
+        </div>
+        <div class="input-group mb-3">
+          <input formControlName="confirmPassword" type="password" class="form-control" placeholder="Confirm password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- /.col -->
+          <div class="col-12">
+            <button [disabled]="registerForm.invalid" (click)="register()"  type="submit" class="btn btn-primary btn-block">Register</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+      <div class="mt-3">
+        <a routerLink="/auth" class="text-center">I have an account</a>
+      </div>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+
+<app-footer></app-footer>

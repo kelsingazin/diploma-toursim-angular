@@ -1,0 +1,81 @@
+.login-box {
+  width: 360px;
+  margin: 5rem auto 5rem;
+
+}
+
+.login-logo{
+  font-size: 2.1rem;
+  font-weight: 300;
+  margin-bottom: .9rem;
+  text-align: center;
+}
+
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+.login-card-body{
+  background: #ffffff;
+  border-top: 0;
+  color: #666;
+  padding: 20px;
+}
+
+.login-box-msg{
+  margin: 0;
+  padding: 0 20px 20px;
+  text-align: center;
+}
+
+.text-center{
+  color:#007BFF;
+  font-size: 16px;
+  font-family: 'Source Sans Pro', sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+}
+.text-center:hover{
+  color:blue;
+}
+
+.login-card-body .input-group .form-control {
+  border-right: 0;
+}
+
+.login-card-body .input-group .form-control:focus{
+  box-shadow: none;
+}
+
+.login-card-body .input-group .form-control:focus ~ .input-group-append .input-group-text {
+  border-color: #80bdff;
+}
+
+.login-card-body .input-group .form-control.is-valid:focus{
+  box-shadow: none;
+}
+
+.login-card-body .input-group .form-control.is-valid ~ .input-group-append .input-group-text {
+  border-color: #28a745;
+}
+
+.login-card-body .input-group .form-control.is-invalid:focus{
+  box-shadow: none;
+}
+
+.login-card-body .input-group .form-control.is-invalid ~ .input-group-append .input-group-text {
+  border-color: #dc3545;
+}
+
+.login-card-body .input-group .input-group-text {
+  background-color: transparent;
+  border-bottom-right-radius: 0.25rem;
+  border-left: 0;
+  border-top-right-radius: 0.25rem;
+  color: #777;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+

@@ -1,0 +1,164 @@
+<div class="container">
+  <div *ngIf="soloTour$ |async as tour; else loading">
+    <div class="d-flex">
+      <div class="row">
+        <div class="col-12 col-md-6 mt-5 ">
+          <div id="tourSlider" class="carousel slide mb-2" data-ride="carousel">
+
+            <ul class="carousel-indicators">
+              <li data-target="#tourSlider" data-slide-to="0" class="active"></li>
+              <li data-target="#tourSlider" data-slide-to="1"></li>
+              <li data-target="#tourSlider" data-slide-to="2"></li>
+            </ul>
+
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img [src]="srcUrl+tour.images[0].file" width="550" height="300">
+              </div>
+              <div class="carousel-item">
+                <img [src]="srcUrl+tour.images[1].file" width="550" height="300">
+              </div>
+              <div class="carousel-item">
+                <img [src]="srcUrl+tour.images[2].file" width="550" height="300">
+              </div>
+            </div>
+
+            <a class="carousel-control-prev" href="#tourSlider" data-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#tourSlider" data-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </a>
+          </div>
+          <div class="" >
+            <div class="d-flex" style="justify-content: space-around; text-align: center ">
+              <h4><i class="fas fa-calendar-alt"></i> <br> {{tourStartDate}}</h4>
+              <h4><i class="fas fa-tenge"></i> <br>{{tour.price}}</h4>
+              <h4><i class="fas fa-user"></i> <br> Now {{curPersonNumber}}</h4>
+            </div>
+            <div class="d-flex" style="justify-content: space-around; text-align: center">
+              <h4><i class="fas fa-calendar-alt"></i> <br> {{tourEndDate}}</h4>
+              <h4><i class="far fa-clock"></i> <br> {{tour.duration}}</h4>
+              <h4><i class="fas fa-user"></i> <br> Total {{tourPersonNumber}}</h4>
+            </div>
+
+          </div>
+
+          <div>
+            <form [formGroup]="bookingForm">
+              <div *ngIf="showModalError" class="alert alert-danger">
+                Exceeded the maximum number of tour participants!
+              </div>
+              <input formControlName="booking_number_of_persons" class="form-control" type="number"
+                     placeholder="Number of travelers">
+
+              <button [disabled]="bookingForm.invalid" class="btn btn-primary bookingButton my-2" (click)="bookTour()">
+                Book
+              </button>
+            </form>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-6 mt-5 ">
+          <h1>{{tour.title}}</h1>
+          <p class="mt-4">{{tour.text}}</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="comments">
+            <div class="card text-black bg-light mb-5 ">
+              <div class="card-header">
+                <h3 class="card-title">Send a review</h3>
+              </div>
+              <div class="card-body">
+                <form [formGroup]="reviewForm">
+                  <div class="text-danger"
+                       *ngIf="!reviewForm.get('review_title').valid && reviewForm.get('review_title').touched">
+                    <small>Enter review title</small>
+                  </div>
+                  <input formControlName="review_title" class="form-control form-control-lg" type="text"
+                         placeholder="Title">
+                  <br>
+                  <div class="text-danger"
+                       *ngIf="!reviewForm.get('review_text').valid && reviewForm.get('review_text').touched">
+                    <small>Enter review text</small>
+                  </div>
+                  <input formControlName="review_text" class="form-control" type="text" placeholder="Text">
+                  <br>
+                  <div class="text-danger"
+                       *ngIf="!reviewForm.get('review_rating').valid && reviewForm.get('review_rating').touched">
+                    <small>Enter review rating</small>
+                  </div>
+                  <input formControlName="review_rating" class="form-control form-control-sm" type="text"
+                         placeholder="Rating 1-5">
+                </form>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <button [disabled]="reviewForm.invalid" (click)="sendReview()" type="submit"
+                        class="btn btn-lg btn-block btn-outline-primary">Send
+                </button>
+              </div>
+            </div>
+
+            <!--            Review filter starts-->
+            <div class="card card-danger my-4">
+              <div class="card-header">
+                <h3 class="card-title">Review Filter</h3>
+              </div>
+              <div class="card-body">
+                <div class="row">
+
+                  <div class="col-4">
+                    <select class="form-control" [(ngModel)]="tourRating">
+                      <option selected>Review Rating</option>
+                      <option>5</option>
+                      <option>4</option>
+                      <option>3</option>
+                      <option>2</option>
+                      <option>1</option>
+                    </select>
+                  </div>
+                  <div class="col-4">
+                    <input type="text" class="form-control" placeholder="Review Title" [(ngModel)]="tourTitle">
+                  </div>
+                  <div class="col-4">
+                    <input type="text" class="form-control" placeholder="Review Content" [(ngModel)]="tourContent">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!--            Review filter ends-->
+
+
+            <div class="comment-box"
+                 *ngFor="let review of tour.reviews | soloTitlePipe:tourTitle | soloContentPipe:tourContent | soloRatingPipe:tourRating">
+              <span class="commenter-pic">
+                <img src="../../assets/img/user.png" class="img-fluid">
+              </span>
+              <span class="commenter-name">{{review.review_creator.username}}
+              </span>
+              <h5>{{review.review_title}}</h5>
+              <p class="comment-txt">{{review.review_text}}</p>
+              <div class="d-flex comments-footer">
+
+                <p>Rating: {{review.review_rating}} </p>
+                <p class="comment-time">{{review.review_created_data | date}}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #loading>
+    <div class="lds-dual-ring"></div>
+  </ng-template>
+</div>
