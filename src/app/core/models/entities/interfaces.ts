@@ -24,6 +24,7 @@ export interface AuthResponse {
   auth_token: string;
 }
 
+
 export interface Tour {
   id: number;
   text: string;
@@ -33,7 +34,14 @@ export interface Tour {
   price: any;
   reviews: any;
   tour_detail: Tour_detail;
-  travel_agent_id: TravelAgent;
+  travel_agent_id?: TravelAgent;
+  average_review?: number;
+  tour_rating?: number;
+  type_of_tour?: [TourType];
+}
+
+class TourType {
+  type_of_tour_name: string;
 }
 
 export interface Tour_detail {

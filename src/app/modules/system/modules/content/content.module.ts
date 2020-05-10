@@ -16,10 +16,14 @@ import {SoloTitlePipe} from './shared/solo-tour-pipes/solo-title.pipe';
 import {SoloContentPipe} from './shared/solo-tour-pipes/solo-content.pipe';
 import {SoloRatingPipe} from './shared/solo-tour-pipes/solo-rating.pipe';
 import {TextMaskModule} from 'angular2-text-mask';
+import {TourAscPipe} from './shared/tour-list-pipes/tour-asc.pipe';
+import {UniqueDurationPipe} from './shared/tour-list-pipes/unique-duration.pipe';
+import {UniqueTourProviderPipe} from './shared/tour-list-pipes/unique-tour-provider.pipe';
+import {TourTypePipe} from './shared/tour-list-pipes/tour-type.pipe';
 
 
 @NgModule({
-  declarations: [HomePageComponent, ToursPageComponent, ToursListPageComponent, SoloTourPageComponent, AccountPageComponent, SearchPipe, SearchDurationPipe, SearchTourAgentPipe, SoloTitlePipe, SoloContentPipe, SoloRatingPipe],
+  declarations: [HomePageComponent, ToursPageComponent, ToursListPageComponent, SoloTourPageComponent, AccountPageComponent, SearchPipe, SearchDurationPipe, SearchTourAgentPipe, SoloTitlePipe, SoloContentPipe, SoloRatingPipe, TourAscPipe, UniqueDurationPipe, UniqueTourProviderPipe, TourTypePipe],
     imports: [
         CommonModule,
         ContentRoutingModule,

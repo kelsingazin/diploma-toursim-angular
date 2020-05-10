@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../core/services/auth.service';
-import {AccountService} from '../../core/services/account.service';
 
 @Component({
   selector: 'app-system',
@@ -9,7 +8,8 @@ import {AccountService} from '../../core/services/account.service';
 })
 export class SystemComponent implements OnInit {
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              ) {
   }
 
   ngOnInit(): void {

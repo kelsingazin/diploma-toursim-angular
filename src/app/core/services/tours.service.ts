@@ -11,8 +11,8 @@ export class ToursService {
   constructor(private http: HttpClient) {
   }
 
-  public getTours(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/api/v1/fornow/tours`);
+  public getTours(): Observable<Tour> {
+    return this.http.get<Tour>(`${this.apiUrl}/api/v1/fornow/tours`);
   }
 
   public getTourById(id: number): Observable<Tour> {

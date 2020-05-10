@@ -9,6 +9,7 @@ import {BookingRequest} from '../../../../../../core/models/requests/booking-req
 import {BookingService} from '../../../../../../core/services/booking.service';
 import {ReviewRequest} from '../../../../../../core/models/requests/review-request';
 import {environment} from '../../../../../../../environments/environment';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-solo-tour-page',
@@ -25,11 +26,12 @@ export class SoloTourPageComponent implements OnInit{
   tourEndDate: any;
   curPersonNumber: number;
   tourPersonNumber: number;
-  tourRating: '';
-  tourTitle: '';
-  tourContent: '';
+  reviewRatingFilter: '';
+  reviewTitleFilter: '';
+  reviewContentFilter: '';
   srcUrl = environment.apiUrl;
-  showModalError = false;
+
+
 
 
   constructor(private route: ActivatedRoute,
@@ -37,6 +39,7 @@ export class SoloTourPageComponent implements OnInit{
               private toursService: ToursService,
               private bookingService: BookingService,
               private builder: FormBuilder,
+              private toastr: ToastrService
               ) {
   }
 
@@ -75,9 +78,9 @@ export class SoloTourPageComponent implements OnInit{
 
   bookTour() {
     if (this.curPersonNumber + this.bookingForm.value.booking_number_of_persons > this.tourPersonNumber) {
-      this.showModalError = true;
+      this.bookingForm.reset();
+      this.toastr.error('Exceeded the maximum number of tour participants!', 'Sorry!');
     } else {
-      this.showModalError = false;
       const bookingRequest = this.bookingForm.getRawValue() as BookingRequest;
       this.bookingService.bookTour(bookingRequest, this.tourId, this.tourDetailId).subscribe(perf => {
         this.router.navigateByUrl('/account');

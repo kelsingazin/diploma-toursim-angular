@@ -46,9 +46,6 @@
 
           <div>
             <form [formGroup]="bookingForm">
-              <div *ngIf="showModalError" class="alert alert-danger">
-                Exceeded the maximum number of tour participants!
-              </div>
               <input formControlName="booking_number_of_persons" class="form-control" type="number"
                      placeholder="Number of travelers">
 
@@ -115,9 +112,9 @@
                 <div class="row">
 
                   <div class="col-4">
-                    <select class="form-control" [(ngModel)]="tourRating">
-                      <option selected>Review Rating</option>
-                      <option>5</option>
+                    <label for="reviewRatingFilter">Review Rating</label>
+                    <select id="reviewRatingFilter" class="form-control" [(ngModel)]="reviewRatingFilter">
+                      <option >5</option>
                       <option>4</option>
                       <option>3</option>
                       <option>2</option>
@@ -125,10 +122,12 @@
                     </select>
                   </div>
                   <div class="col-4">
-                    <input type="text" class="form-control" placeholder="Review Title" [(ngModel)]="tourTitle">
+                    <label for="reviewTitleFilter">Review Title</label>
+                    <input id="reviewTitleFilter" type="text" class="form-control" [(ngModel)]="reviewTitleFilter">
                   </div>
                   <div class="col-4">
-                    <input type="text" class="form-control" placeholder="Review Content" [(ngModel)]="tourContent">
+                    <label for="reviewContentFilter">Review Content</label>
+                    <input id="reviewContentFilter" type="text" class="form-control" [(ngModel)]="reviewContentFilter">
                   </div>
                 </div>
               </div>
@@ -138,7 +137,7 @@
 
 
             <div class="comment-box"
-                 *ngFor="let review of tour.reviews | soloTitlePipe:tourTitle | soloContentPipe:tourContent | soloRatingPipe:tourRating">
+                 *ngFor="let review of tour.reviews | soloTitlePipe: reviewTitleFilter | soloContentPipe: reviewContentFilter | soloRatingPipe: reviewRatingFilter">
               <span class="commenter-pic">
                 <img src="../../assets/img/user.png" class="img-fluid">
               </span>

@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-md-12 col-lg-12 my-5">
       <!--      <div *ngIf="loading" class="lds-dual-ring"></div>-->
+      <button class="btn btn-primary" (click)="onReloadPage()">Hard reload</button>
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Hello {{profile.username}}!</h3>
@@ -67,29 +68,38 @@
                   {{bk.booking_status}}
                 </td>
                 <td>
-                  <a class="btn btn-danger btn-sm m-1 text-white" style="width: 60px" (click)="deleteTour(bk.id)">
-                    <i class="fas fa-trash"></i>
-
-                  </a>
+<!--                  <a class="btn btn-danger btn-sm m-1 text-white "-->
+<!--                     (click)="deleteTour(bk.id)"-->
+<!--                     [ngClass]="{'disabled': bk.booking_status==='Approved'}"-->
+<!--                  >-->
+<!--                    <i class="fas fa-trash"></i>-->
+<!--                  </a>-->
+                  <button class="btn btn-danger btn-sm m-1 text-whitex"
+                  (click)="deleteTour(bk.id)"
+                          type="submit"
+                          [ngClass]="{'disabled': bk.booking_status==='Approved'}"
+                  ><i class="fas fa-trash"></i></button>
                 </td>
                 <td>
-                  <input type="hidden"  ngModel="{{bk.id}}" id="approveTourId" formControlName="id" >
-                  <a  class="btn btn-success btn-sm m-1 text-white" style="width: 60px" (click)="approveBooking()">
+                  <input type="hidden" ngModel="{{bk.id}}" id="approveTourId" formControlName="id">
+                  <a class="btn btn-success btn-sm m-1 text-white"
+                     (click)="approveBooking()"
+                     [ngClass]="{'disabled': bk.booking_status==='Approved'}">
                     <i class="fas fa-money-check-alt"></i>
 
                   </a>
                 </td>
                 <td *ngIf="bk.booking_status==='Approved'">
-                  <a href="http://127.0.0.1:8000/api/v1/fornow/users/me/{{bk.id}}/pdf"
+                  <a target="_blank" href="http://127.0.0.1:8000/api/v1/fornow/users/me/{{bk.id}}/pdf"
                      class="btn btn-primary btn-sm m-1 text-white"
-                     style="width: 60px">
+                  >
                     <i class="fas fa-ticket-alt"></i>
                   </a>
                 </td>
                 <td *ngIf="bk.booking_status==='Approved'">
                   <a href="http://127.0.0.1:8000/api/v1/fornow/users/me/{{bk.id}}/pdf/download"
                      class="btn btn-primary btn-sm m-1 text-white"
-                     style="width: 60px">
+                  >
                     <i class="fas fa-file-download"></i>
                   </a>
                 </td>
@@ -101,63 +111,63 @@
       </div>
     </div>
 
-<!--    <div class="col-md-12 col-lg-5 my-5">-->
-<!--      <div id="pay-invoice" class="card">-->
-<!--        <div class="card-body">-->
-<!--          <div class="card-title">-->
-<!--            <h3 class="text-center">Pay Invoice</h3>-->
-<!--          </div>-->
-<!--          <hr>-->
-<!--          <form>-->
-<!--            <div class="form-group ">-->
-<!--              <label for="creditCardName" class="mb-1">Name on card</label>-->
-<!--              <input id="creditCardName" name="creditCardName"-->
-<!--                     type="text" class="form-control"-->
-<!--                     placeholder="John Doe">-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--              <label for="creditCardNumber" class="mb-1">Card number</label>-->
-<!--              <input id="creditCardNumber" name="creditCardNumber"-->
-<!--                     type="text" class="form-control"-->
-<!--                     [textMask]="{mask: creditMask}"-->
-<!--                     placeholder="1234 5678 9012 3456">-->
-<!--            </div>-->
-<!--            <div class="row">-->
-<!--              <div class="col-6">-->
-<!--                <div class="form-group">-->
-<!--                  <label for="creditCardExp" class="mb-1">Expiration</label>-->
-<!--                  <input id="creditCardExp" name="creditCardExp"-->
-<!--                         type="text" class="form-control"-->
-<!--                         [textMask]="{mask: dateMask}"-->
-<!--                         placeholder="12/22">-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="col-6">-->
-<!--                <label for="securityCardCode" class="mb-1">Security code</label>-->
-<!--                <div class="input-group">-->
-<!--                  <input id="securityCardCode" name="securityCardCode"-->
-<!--                         type="text" class="form-control"-->
-<!--                         [textMask]="{mask: securityMask}"-->
-<!--                         placeholder="123">-->
-<!--                  <div class="input-group-text"><i class="fa fa-question-circle"></i></div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            &lt;!&ndash;            <div *ngIf="bookings[0].booking_status === 'Waiting for payment'">&ndash;&gt;-->
-<!--            <div>-->
-<!--              <button type="submit" class="btn btn-lg btn-info btn-block" (click)="approveBooking()">-->
-<!--                <span class="mx-2">Pay <i class="fas fa-tenge"></i>{{totalPrice}}</span>-->
-<!--              </button>-->
-<!--            </div>-->
-<!--            <div *ngIf="bookings[0].booking_status === 'Approved'">-->
-<!--              <button type="submit" class="btn btn-lg btn-info btn-block" >-->
-<!--                Get PDF-->
-<!--              </button>-->
-<!--            </div>-->
-<!--          </form>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+    <!--    <div class="col-md-12 col-lg-5 my-5">-->
+    <!--      <div id="pay-invoice" class="card">-->
+    <!--        <div class="card-body">-->
+    <!--          <div class="card-title">-->
+    <!--            <h3 class="text-center">Pay Invoice</h3>-->
+    <!--          </div>-->
+    <!--          <hr>-->
+    <!--          <form>-->
+    <!--            <div class="form-group ">-->
+    <!--              <label for="creditCardName" class="mb-1">Name on card</label>-->
+    <!--              <input id="creditCardName" name="creditCardName"-->
+    <!--                     type="text" class="form-control"-->
+    <!--                     placeholder="John Doe">-->
+    <!--            </div>-->
+    <!--            <div class="form-group">-->
+    <!--              <label for="creditCardNumber" class="mb-1">Card number</label>-->
+    <!--              <input id="creditCardNumber" name="creditCardNumber"-->
+    <!--                     type="text" class="form-control"-->
+    <!--                     [textMask]="{mask: creditMask}"-->
+    <!--                     placeholder="1234 5678 9012 3456">-->
+    <!--            </div>-->
+    <!--            <div class="row">-->
+    <!--              <div class="col-6">-->
+    <!--                <div class="form-group">-->
+    <!--                  <label for="creditCardExp" class="mb-1">Expiration</label>-->
+    <!--                  <input id="creditCardExp" name="creditCardExp"-->
+    <!--                         type="text" class="form-control"-->
+    <!--                         [textMask]="{mask: dateMask}"-->
+    <!--                         placeholder="12/22">-->
+    <!--                </div>-->
+    <!--              </div>-->
+    <!--              <div class="col-6">-->
+    <!--                <label for="securityCardCode" class="mb-1">Security code</label>-->
+    <!--                <div class="input-group">-->
+    <!--                  <input id="securityCardCode" name="securityCardCode"-->
+    <!--                         type="text" class="form-control"-->
+    <!--                         [textMask]="{mask: securityMask}"-->
+    <!--                         placeholder="123">-->
+    <!--                  <div class="input-group-text"><i class="fa fa-question-circle"></i></div>-->
+    <!--                </div>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--            &lt;!&ndash;            <div *ngIf="bookings[0].booking_status === 'Waiting for payment'">&ndash;&gt;-->
+    <!--            <div>-->
+    <!--              <button type="submit" class="btn btn-lg btn-info btn-block" (click)="approveBooking()">-->
+    <!--                <span class="mx-2">Pay <i class="fas fa-tenge"></i>{{totalPrice}}</span>-->
+    <!--              </button>-->
+    <!--            </div>-->
+    <!--            <div *ngIf="bookings[0].booking_status === 'Approved'">-->
+    <!--              <button type="submit" class="btn btn-lg btn-info btn-block" >-->
+    <!--                Get PDF-->
+    <!--              </button>-->
+    <!--            </div>-->
+    <!--          </form>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
 
   </div>
 </div>

@@ -25,11 +25,17 @@
   }
 }
 
-
-
-.panel-title {display: inline;font-weight: bold;}
-.checkbox.pull-right { margin: 0; }
-.pl-ziro { padding-left: 0px; }
-.creditCard{
-  border:1px solid black;
+a.disabled {
+  pointer-events: none;
+  cursor: default;
 }
+a{
+  width: 60px;
+}
+
+/*.panel-title {display: inline;font-weight: bold;}*/
+/*.checkbox.pull-right { margin: 0; }*/
+/*.pl-ziro { padding-left: 0px; }*/
+/*.creditCard{*/
+/*  border:1px solid black;*/
+/*}*/

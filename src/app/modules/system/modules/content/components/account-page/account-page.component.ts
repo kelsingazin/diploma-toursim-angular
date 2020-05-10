@@ -1,17 +1,20 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {Booking} from '../../../../../../core/models/entities/interfaces';
 import {ToursService} from '../../../../../../core/services/tours.service';
 import {PaymentService} from '../../../../../../core/services/payment.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {TourPaymentRequest} from '../../../../../../core/models/requests/tour-payment-request';
 import {Subscription} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-account-page',
   templateUrl: './account-page.component.html',
   styleUrls: ['./account-page.component.css']
 })
-export class AccountPageComponent implements OnInit, OnDestroy {
+export class AccountPageComponent implements OnInit, OnDestroy, OnChanges {
   profile = JSON.parse(localStorage.getItem('profile'));
   totalPrice = 0;
   public paymentForm: FormGroup;
@@ -23,20 +26,36 @@ export class AccountPageComponent implements OnInit, OnDestroy {
 
   constructor(private toursService: ToursService,
               private pdfService: PaymentService,
-              private builder: FormBuilder) {
+              private builder: FormBuilder,
+              private toastr: ToastrService,
+              private location: Location,
+              private router: Router) {
   }
-
-  ngOnInit(): void {
-    console.log('Profile', this.profile);
-    this.bookings = this.profile.bookings;
+  loadTours(){
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.profile.bookings.length; i++) {
       this.totalPrice += this.profile.bookings[i].booking_price * this.profile.bookings[i].booking_number_of_persons;
     }
+  }
+  ngOnInit(){
+    // this.router.routeReuseStrategy.shouldReuseRoute = () => {
+    //   return false;
+    // };
+
+    console.log('Profile', this.profile);
+    this.bookings = this.profile.bookings;
+    this.loadTours();
     this.paymentForm = this.builder.group({
       id: ['']
     });
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // if (this.bookings.length !== 0){
+    //   this.onReloadPage();
+    // }
+  }
+
   ngOnDestroy(): void {
     if (this.mySubscription) {
       this.mySubscription.unsubscribe();
@@ -44,7 +63,8 @@ export class AccountPageComponent implements OnInit, OnDestroy {
   }
   deleteTour(id: number) {
     this.mySubscription = this.toursService.deleteTourById(id).subscribe(perf => {
-      //this.bookings = this.bookings.filter(bkTour => bkTour.id !== id);
+      this.toastr.info('', 'Tour was deleted!');
+      location.reload();
       console.log('TOUR WAS DELETED');
     }, (err) => {
       console.log(err);
@@ -54,7 +74,16 @@ export class AccountPageComponent implements OnInit, OnDestroy {
   approveBooking() {
     const tourPaymentRequest = this.paymentForm.getRawValue() as TourPaymentRequest;
     this.pdfService.approvePayment(tourPaymentRequest).subscribe( perf => {
+      this.toastr.success('', 'Tour WAS APPROVED!');
+      this.onReloadPage();
+      this.onReloadPage();
+      this.onReloadPage();
       console.log('Tour WAS APPROVED!');
     });
+  }
+
+  onReloadPage() {
+    console.log('/account');
+    this.router.navigateByUrl('account');
   }
 }
