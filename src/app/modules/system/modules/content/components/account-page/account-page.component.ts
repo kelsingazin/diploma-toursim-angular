@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Inject, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {Booking} from '../../../../../../core/models/entities/interfaces';
 import {ToursService} from '../../../../../../core/services/tours.service';
 import {PaymentService} from '../../../../../../core/services/payment.service';
@@ -7,7 +7,7 @@ import {TourPaymentRequest} from '../../../../../../core/models/requests/tour-pa
 import {Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
-import {Location} from '@angular/common';
+import {DOCUMENT, Location} from '@angular/common';
 
 @Component({
   selector: 'app-account-page',
@@ -29,7 +29,8 @@ export class AccountPageComponent implements OnInit, OnDestroy, OnChanges {
               private builder: FormBuilder,
               private toastr: ToastrService,
               private location: Location,
-              private router: Router) {
+              private router: Router,
+              @Inject(DOCUMENT) private document: Document) {
   }
   loadTours(){
     // tslint:disable-next-line:prefer-for-of
@@ -42,7 +43,7 @@ export class AccountPageComponent implements OnInit, OnDestroy, OnChanges {
     //   return false;
     // };
 
-    console.log('Profile', this.profile);
+    // console.log('Profile', this.profile);
     this.bookings = this.profile.bookings;
     this.loadTours();
     this.paymentForm = this.builder.group({
@@ -76,14 +77,24 @@ export class AccountPageComponent implements OnInit, OnDestroy, OnChanges {
     this.pdfService.approvePayment(tourPaymentRequest).subscribe( perf => {
       this.toastr.success('', 'Tour WAS APPROVED!');
       this.onReloadPage();
+      this.onReloadPage2();
       this.onReloadPage();
-      this.onReloadPage();
+      this.document.defaultView.location.reload();
+      this.document.defaultView.location.reload();
+      this.document.defaultView.location.reload();
+      this.document.defaultView.location.reload();
       console.log('Tour WAS APPROVED!');
     });
   }
 
   onReloadPage() {
-    console.log('/account');
-    this.router.navigateByUrl('account');
+    // console.log('/account');
+    // this.router.navigateByUrl('account');
+    this.document.defaultView.location.reload();
+  }
+  onReloadPage2() {
+    // console.log('/account');
+    // this.router.navigateByUrl('account');
+    this.document.defaultView.location.reload();
   }
 }

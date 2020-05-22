@@ -16,7 +16,7 @@ export class SystemComponent implements OnInit {
     this.authService.userRequest()
       .subscribe(perf => {
         localStorage.setItem('profile', JSON.stringify(perf));
-        console.log('perf is ', perf);
+        // console.log('perf is ', perf);
       });
   }
 

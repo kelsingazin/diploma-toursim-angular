@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Tour} from '../../../../../../core/models/entities/interfaces';
 import {ToursService} from '../../../../../../core/services/tours.service';
 import {FormGroup} from '@angular/forms';
-import {Location} from '@angular/common';
+import {DOCUMENT, Location} from '@angular/common';
 import {Router} from '@angular/router';
 
 @Component({
@@ -21,7 +21,8 @@ export class ToursListPageComponent implements OnInit {
 
   constructor(private toursService: ToursService,
               private location: Location,
-              private router: Router) {
+              private router: Router,
+              @Inject(DOCUMENT) private document: Document) {
   }
 
   ngOnInit(): void {
@@ -32,7 +33,11 @@ export class ToursListPageComponent implements OnInit {
   }
 
   resetFilter() {
-    this.router.navigateByUrl('/tours');
+   // this.router.navigateByUrl('/tours');
+   //  this.router.routeReuseStrategy.shouldReuseRoute = () => {
+   //    return false;
+   //  };
+    this.document.defaultView.location.reload();
   }
 
 }

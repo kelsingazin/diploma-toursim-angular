@@ -49,13 +49,13 @@ export class SoloTourPageComponent implements OnInit{
         return this.toursService.getTourById(params['id']);
       }));
     this.soloTour$.subscribe(prepareTour => {
-      console.log('prepareTour ', prepareTour);
-      console.log(
-        'cur_person_number ' + prepareTour.tour_detail[0].cur_person_number +
-        '\ntour_person_number ' + prepareTour.tour_detail[0].tour_person_number +
-        '\ntour_start_date ' + prepareTour.tour_detail[0].tour_start_date +
-        '\ntour_end_date ' + prepareTour.tour_detail[0].tour_end_date +
-        '\ntour_detail_id ' + prepareTour.tour_detail[0].id);
+      // console.log('prepareTour ', prepareTour);
+      // console.log(
+      //   'cur_person_number ' + prepareTour.tour_detail[0].cur_person_number +
+      //   '\ntour_person_number ' + prepareTour.tour_detail[0].tour_person_number +
+      //   '\ntour_start_date ' + prepareTour.tour_detail[0].tour_start_date +
+      //   '\ntour_end_date ' + prepareTour.tour_detail[0].tour_end_date +
+      //   '\ntour_detail_id ' + prepareTour.tour_detail[0].id);
       this.tourId = prepareTour.id;
       this.tourDetailId = prepareTour.tour_detail[0].id;
       this.tourStartDate = prepareTour.tour_detail[0].tour_start_date;

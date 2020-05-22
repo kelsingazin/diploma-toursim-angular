@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log('Submit', this.loginForm.value);
+    //console.log('Submit', this.loginForm.value);
     const loginRequest = this.loginForm.getRawValue() as LoginRequest;
     this.authService.login(loginRequest).subscribe(perf => {
       this.authService.authorize(perf.auth_token);
