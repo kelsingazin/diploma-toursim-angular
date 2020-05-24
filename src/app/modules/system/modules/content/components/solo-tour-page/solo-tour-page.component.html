@@ -1,36 +1,72 @@
 <div class="container">
   <div *ngIf="soloTour$ |async as tour; else loading">
-    <div class="d-flex">
+
+    <div>
       <div class="row">
-        <div class="col-12 col-md-6 mt-5 ">
-          <div id="tourSlider" class="carousel slide mb-2" data-ride="carousel">
-
-            <ul class="carousel-indicators">
-              <li data-target="#tourSlider" data-slide-to="0" class="active"></li>
-              <li data-target="#tourSlider" data-slide-to="1"></li>
-              <li data-target="#tourSlider" data-slide-to="2"></li>
-            </ul>
-
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img [src]="srcUrl+tour.images[0].file" width="550" height="300">
-              </div>
-              <div class="carousel-item">
-                <img [src]="srcUrl+tour.images[1].file" width="550" height="300">
-              </div>
-              <div class="carousel-item">
-                <img [src]="srcUrl+tour.images[2].file" width="550" height="300">
-              </div>
+        <div id="tourSlider" class="carousel slide mb-2 col-12 col-md-6 mt-3" data-ride="carousel">
+          <h1 class="headName">{{tour.title}}</h1>
+          <ul class="carousel-indicators">
+            <li data-target="#tourSlider" data-slide-to="0" class="active"></li>
+            <li data-target="#tourSlider" data-slide-to="1"></li>
+            <li data-target="#tourSlider" data-slide-to="2"></li>
+          </ul>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img [src]="srcUrl+tour.images[0].file" width="550" height="300">
             </div>
-
-            <a class="carousel-control-prev" href="#tourSlider" data-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </a>
-            <a class="carousel-control-next" href="#tourSlider" data-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </a>
+            <div class="carousel-item">
+              <img [src]="srcUrl+tour.images[1].file" width="550" height="300">
+            </div>
+            <div class="carousel-item">
+              <img [src]="srcUrl+tour.images[2].file" width="550" height="300">
+            </div>
           </div>
-          <div class="" >
+          <a class="carousel-control-prev" href="#tourSlider" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a class="carousel-control-next" href="#tourSlider" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </a>
+        </div>
+
+
+        <div id="hotelSlider" class="carousel slide mb-2 col-12 col-md-6 mt-3" data-ride="carousel">
+          <h1 class="headName">{{tour.hotel.hotel_name}}</h1>
+          <ul class="carousel-indicators">
+            <li data-target="#hotelSlider" data-slide-to="0" class="active"></li>
+            <li data-target="#hotelSlider" data-slide-to="1"></li>
+            <li data-target="#hotelSlider" data-slide-to="2"></li>
+          </ul>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img [src]="srcUrl+tour.hotel.hotel_images[0].image" width="550" height="300">
+            </div>
+            <div class="carousel-item">
+              <img [src]="srcUrl+tour.hotel.hotel_images[0].image" width="550" height="300">
+            </div>
+            <div class="carousel-item">
+              <img [src]="srcUrl+tour.hotel.hotel_images[0].image" width="550" height="300">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#hotelSlider" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a class="carousel-control-next" href="#hotelSlider" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div>
+      <div class="row">
+        <div class="tourDetail col-12 col-md-6 my-2">
+          <p>{{tour.text}}</p>
+        </div>
+        <div class="tourBookingInfo col-12 col-md-6 my-2">
+          <div>
             <div class="d-flex" style="justify-content: space-around; text-align: center ">
               <h4><i class="fas fa-calendar-alt"></i> <br> {{tourStartDate}}</h4>
               <h4><i class="fas fa-tenge"></i> <br>{{tour.price}}</h4>
@@ -41,24 +77,17 @@
               <h4><i class="far fa-clock"></i> <br> {{tour.duration}}</h4>
               <h4><i class="fas fa-user"></i> <br> Total {{tourPersonNumber}}</h4>
             </div>
-
           </div>
 
           <div>
             <form [formGroup]="bookingForm">
               <input formControlName="booking_number_of_persons" class="form-control" type="number"
                      placeholder="Number of travelers">
-
-              <button [disabled]="bookingForm.invalid" class="btn btn-primary bookingButton my-2" (click)="bookTour()">
-                Book
+              <button [disabled]="bookingForm.invalid" class="btn btn-primary bookingButton my-2"
+                      (click)="bookTour()">Book
               </button>
             </form>
-
           </div>
-        </div>
-        <div class="col-12 col-md-6 mt-5 ">
-          <h1>{{tour.title}}</h1>
-          <p class="mt-4">{{tour.text}}</p>
         </div>
       </div>
     </div>
@@ -114,7 +143,7 @@
                   <div class="col-4">
                     <label for="reviewRatingFilter">Review Rating</label>
                     <select id="reviewRatingFilter" class="form-control" [(ngModel)]="reviewRatingFilter">
-                      <option >5</option>
+                      <option>5</option>
                       <option>4</option>
                       <option>3</option>
                       <option>2</option>

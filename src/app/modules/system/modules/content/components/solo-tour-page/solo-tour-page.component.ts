@@ -49,7 +49,7 @@ export class SoloTourPageComponent implements OnInit{
         return this.toursService.getTourById(params['id']);
       }));
     this.soloTour$.subscribe(prepareTour => {
-      // console.log('prepareTour ', prepareTour);
+      console.log('prepareTour ', prepareTour);
       // console.log(
       //   'cur_person_number ' + prepareTour.tour_detail[0].cur_person_number +
       //   '\ntour_person_number ' + prepareTour.tour_detail[0].tour_person_number +

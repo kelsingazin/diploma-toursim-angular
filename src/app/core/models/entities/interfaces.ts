@@ -24,6 +24,16 @@ export interface AuthResponse {
   auth_token: string;
 }
 
+export interface Hotel {
+  hotel_images: ImageLocation;
+  hotel_name: string;
+  hotel_stars: string;
+  id: number;
+}
+
+export interface ImageLocation {
+  image: string;
+}
 
 export interface Tour {
   id: number;
@@ -33,6 +43,7 @@ export interface Tour {
   images: FileLocation;
   price: any;
   reviews: any;
+  hotel: Hotel;
   tour_detail: Tour_detail;
   travel_agent_id?: TravelAgent;
   average_review?: number;
