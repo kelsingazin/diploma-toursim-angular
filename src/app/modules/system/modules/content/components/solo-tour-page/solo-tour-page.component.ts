@@ -77,6 +77,7 @@ export class SoloTourPageComponent implements OnInit{
   }
 
   bookTour() {
+    console.log("test");
     if (this.curPersonNumber + this.bookingForm.value.booking_number_of_persons > this.tourPersonNumber) {
       this.bookingForm.reset();
       this.toastr.error('Exceeded the maximum number of tour participants!', 'Sorry!');

@@ -8,6 +8,7 @@ import {Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
 import {DOCUMENT, Location} from '@angular/common';
+import {environment} from '../../../../../../../environments/environment';
 
 @Component({
   selector: 'app-account-page',
@@ -20,6 +21,7 @@ export class AccountPageComponent implements OnInit, OnDestroy, OnChanges {
   public paymentForm: FormGroup;
   bookings: Booking[] = [];
   mySubscription: Subscription;
+
   creditMask = [/[1-9]/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/];
   securityMask = [/[0-9]/, /\d/, /\d/];
   dateMask = [/[0-9]/, /\d/, '/', /\d/, /\d/];
