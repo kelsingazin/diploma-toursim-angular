@@ -16,7 +16,7 @@ export class ToursPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //console.log('Tour', this.tour);
+    console.log('Tour', this.tour);
   }
 
 }
