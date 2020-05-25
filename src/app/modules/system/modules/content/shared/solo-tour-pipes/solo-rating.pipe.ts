@@ -5,8 +5,7 @@ import {Review} from '../../../../../../core/models/entities/interfaces';
 })
 export class SoloRatingPipe implements PipeTransform{
   transform(reviews: Review[], search = ''): any {
-    // if (!search.trim() || search.includes('Review Rating')) {
-    if (!search.trim()) {
+    if (!search.trim() || search.includes('All')) {
       return reviews;
     }
     return reviews.filter(review => {

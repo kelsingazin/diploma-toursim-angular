@@ -7,7 +7,7 @@ import {Tour} from '../../../../../../core/models/entities/interfaces';
 })
 export class SearchDurationPipe implements PipeTransform{
   transform(tours: Tour[], search = ''): any {
-    if (!search.trim() || search.includes('Tour Duration')) {
+    if (!search.trim() || search.includes('All')) {
       return tours;
     }
     return tours.filter(tour => {

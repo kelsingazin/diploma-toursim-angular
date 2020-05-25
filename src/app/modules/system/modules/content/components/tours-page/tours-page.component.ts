@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Tour} from '../../../../../../core/models/entities/interfaces';
-import {AuthService} from '../../../../../../core/services/auth.service';
-import {environment} from '../../../../../../../environments/environment';
 
 @Component({
   selector: 'app-tours-page',
@@ -10,8 +8,6 @@ import {environment} from '../../../../../../../environments/environment';
 })
 export class ToursPageComponent implements OnInit {
   @Input() tour: Tour;
-  srcUrl = environment.apiUrl;
-
   constructor() {
   }
 

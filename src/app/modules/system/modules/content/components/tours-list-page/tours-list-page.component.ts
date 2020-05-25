@@ -18,6 +18,7 @@ export class ToursListPageComponent implements OnInit {
   searchTourAgent: '';
   tourTypeName: '';
   tourAsc: '';
+  providedServices: '';
 
   constructor(private toursService: ToursService,
               private location: Location,

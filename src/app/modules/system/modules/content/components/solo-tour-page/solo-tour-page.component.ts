@@ -29,9 +29,6 @@ export class SoloTourPageComponent implements OnInit{
   reviewRatingFilter: '';
   reviewTitleFilter: '';
   reviewContentFilter: '';
-  srcUrl = environment.apiUrl;
-
-
 
 
   constructor(private route: ActivatedRoute,

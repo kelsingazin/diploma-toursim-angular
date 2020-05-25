@@ -16,6 +16,11 @@
   border-color: black transparent black transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
+.filterSpecs{
+  justify-content: space-between;
+  align-items: center;
+}
+
 @keyframes lds-dual-ring {
   0% {
     transform: rotate(0deg);

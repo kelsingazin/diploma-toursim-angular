@@ -21,10 +21,7 @@ export class AccountPageComponent implements OnInit, OnDestroy, OnChanges {
   public paymentForm: FormGroup;
   bookings: Booking[] = [];
   mySubscription: Subscription;
-
-  creditMask = [/[1-9]/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/];
-  securityMask = [/[0-9]/, /\d/, /\d/];
-  dateMask = [/[0-9]/, /\d/, '/', /\d/, /\d/];
+  urlPdf = environment.apiUrl;
 
   constructor(private toursService: ToursService,
               private pdfService: PaymentService,

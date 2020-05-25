@@ -1,7 +1,8 @@
 <div class="container">
   <div class="card card-danger my-4" *ngIf="tours$ | async as tours">
-    <div class="card-header">
+    <div class="card-header d-flex filterSpecs">
       <h3 class="card-title">Tour Filters</h3>
+      <button class="btn btn-outline-primary" (click)="resetFilter()">Reset Filter</button>
     </div>
     <div class="card-body">
       <div class="row">
@@ -13,6 +14,7 @@
         <div class="col-4">
           <label for="tourDurationFilter">Tour Duration</label>
           <select class="form-control" id="tourDurationFilter" [(ngModel)]="searchDuration">
+            <option>All</option>
             <option *ngFor="let tour of tours | uniqueDurationPipe">{{tour.duration}}</option>
           </select>
         </div>
@@ -20,13 +22,12 @@
         <div class="col-4">
           <label for="tourProviderFilter">Tour Providers</label>
           <select class="form-control" id="tourProviderFilter" [(ngModel)]="searchTourAgent">
-            <!--            <option-->
-            <!--              *ngFor="let tour of tours | uniqueTourProviderPipe">-->
-            <!--              {{tour.travel_agent_id.travel_agent_name}}-->
-            <!--            </option>-->
             <option>All</option>
-            <option>Nomad</option>
-            <option>Steppe Spirit</option>
+            <option
+              *ngFor="let tour of tours | uniqueTourProviderPipe">{{tour.travel_agent_id.travel_agent_name}}</option>
+            <!--            <option>All</option>-->
+            <!--            <option>Nomad</option>-->
+            <!--            <option>Steppe Spirit</option>-->
           </select>
         </div>
 
@@ -46,22 +47,17 @@
             <option>Nature</option>
             <option>Youth</option>
             <option>Adult</option>
+
           </select>
         </div>
 
-        <!--        test-->
-        <!--        <div class="col-4 mt-2">-->
-        <!--          <label for="typeOfTourFilter">Tour Type</label>-->
-        <!--          <input type="text" class="form-control" id="typeOfTourFilter" placeholder="Enter tour type"-->
-        <!--                 [(ngModel)]="tourTypeName">-->
-        <!--        </div>-->
-        <!--        test-->
-
         <div class="col-4 mt-2">
-          <label for="resetFilterBtn">Reset </label>
-          <button id="resetFilterBtn" class="btn btn-block btn-outline-primary" (click)="resetFilter()">Reset Filter
-          </button>
-
+          <label for="providedServicesFilter">Provided Services</label>
+          <select class="form-control" id="providedServicesFilter" [(ngModel)]="providedServices">
+            <option>All</option>
+            <option>VISA</option>
+            <option>Medical Insurance</option>
+          </select>
         </div>
       </div>
     </div>
@@ -71,7 +67,7 @@
        class="posts">
     <div class="row">
       <app-tours-page
-        *ngFor="let tour of tours | tourTypePipe: tourTypeName | tourAscPipe: tourAsc | searchTours: searchTitle | searchDurationPipe: searchDuration | searchTourAgentPipe: searchTourAgent"
+        *ngFor="let tour of tours | searchProvidedServicesPipe: providedServices | tourTypePipe: tourTypeName | tourAscPipe: tourAsc | searchTours: searchTitle | searchDurationPipe: searchDuration | searchTourAgentPipe: searchTourAgent"
         [tour]="tour"
         class="col-12 col-md-6 col-lg-4 mb-4">
       </app-tours-page>

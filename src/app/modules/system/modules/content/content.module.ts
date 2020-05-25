@@ -20,10 +20,12 @@ import {TourAscPipe} from './shared/tour-list-pipes/tour-asc.pipe';
 import {UniqueDurationPipe} from './shared/tour-list-pipes/unique-duration.pipe';
 import {UniqueTourProviderPipe} from './shared/tour-list-pipes/unique-tour-provider.pipe';
 import {TourTypePipe} from './shared/tour-list-pipes/tour-type.pipe';
+import {SearchProvidedServicesPipe} from './shared/tour-list-pipes/search-provided-services.pipe';
 
 
 @NgModule({
-  declarations: [HomePageComponent, ToursPageComponent, ToursListPageComponent, SoloTourPageComponent, AccountPageComponent, SearchPipe, SearchDurationPipe, SearchTourAgentPipe, SoloTitlePipe, SoloContentPipe, SoloRatingPipe, TourAscPipe, UniqueDurationPipe, UniqueTourProviderPipe, TourTypePipe],
+  // tslint:disable-next-line:max-line-length
+  declarations: [HomePageComponent, ToursPageComponent, ToursListPageComponent, SoloTourPageComponent, AccountPageComponent, SearchPipe, SearchDurationPipe, SearchTourAgentPipe, SoloTitlePipe, SoloContentPipe, SoloRatingPipe, TourAscPipe, UniqueDurationPipe, UniqueTourProviderPipe, TourTypePipe, SearchProvidedServicesPipe],
     imports: [
         CommonModule,
         ContentRoutingModule,

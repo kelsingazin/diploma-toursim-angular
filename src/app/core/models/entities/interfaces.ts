@@ -45,10 +45,17 @@ export interface Tour {
   reviews: any;
   hotel: Hotel;
   tour_detail: Tour_detail;
-  travel_agent_id?: TravelAgent;
+  travel_agent_id?: {
+    travel_agent_name: string;
+  };
   average_review?: number;
   tour_rating?: number;
   type_of_tour?: [TourType];
+  provided_services?: [ProvidedService];
+}
+
+export class ProvidedService {
+  service_name: string;
 }
 
 class TourType {
