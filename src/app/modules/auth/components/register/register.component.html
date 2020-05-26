@@ -69,7 +69,7 @@
           </small>
           <small *ngIf="registerForm.get('password').errors.minlength">
             Password must be at least {{registerForm.get('password').errors.minlength.requiredLength}}
-            characters!
+            characters, you entered {{registerForm.get('password').errors.minlength.actualLength}} characters!
           </small>
         </div>
         <div class="input-group mb-3">
@@ -84,6 +84,10 @@
         <div class="text-danger" *ngIf="!registerForm.get('confirmPassword').valid && registerForm.get('confirmPassword').touched">
           <small *ngIf="registerForm.get('confirmPassword').errors.required">
             Enter password!
+          </small>
+          <small *ngIf="registerForm.get('confirmPassword').errors.minlength">
+            Password must be at least {{registerForm.get('confirmPassword').errors.minlength.requiredLength}}
+            characters, you entered {{registerForm.get('confirmPassword').errors.minlength.actualLength}} characters!
           </small>
         </div>
         <div class="input-group mb-3">
